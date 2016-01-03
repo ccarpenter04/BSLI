@@ -7,4 +7,10 @@ A library that attempts to identify the language that a given class file was com
 * Groovy
 * Kotlin
 
-Pull requests are welcome along with suggested language additions and any hints as to how to better detect a given source language.
+### Coming Soon
+* Ceylon
+* Clojure
+
+Pull requests are welcome along with suggested language additions and any hints as to how to better detect any of the supported source language.
+
+Unit tests also need to be written to verify correct functionality. Anyone is welcome to write them.
