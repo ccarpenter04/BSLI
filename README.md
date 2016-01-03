@@ -1,2 +1,10 @@
 ## BSLI
-A small set of classes that can be used to identify the jvm language that bytecode was compiled from.
+A library that attempts to identify the language that a given class file was compiled from. This is useful for determining which standard runtimes are required ahead of time to do complete static analysis.
+
+### Supported Languages
+* Java
+* Scala
+* Groovy
+* Kotlin
+
+Pull requests are welcome along with suggested language additions and any hints as to how to better detect a given source language.
