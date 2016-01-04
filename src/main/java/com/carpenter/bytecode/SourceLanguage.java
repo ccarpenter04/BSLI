@@ -19,6 +19,7 @@ public enum SourceLanguage {
     KOTLIN("https://kotlinlang.org", "Sponsored and developed by JetBrains"),
     CEYLON("http://www.ceylon-lang.org", "Sponsored by Red Hat"),
     //TODO add identification to BytecodeClass#getSourceLanguage
+    FREGE("https://github.com/Frege/frege"),
     CLOJURE("http://clojure.org"),
     JRUBY("http://jruby.org"),
     JYTHON("http://www.jython.org"),
