@@ -16,7 +16,7 @@ import java.util.List;
 public enum SourceCodeLanguage {
     JAVA("https://www.java.com"),
     SCALA("http://www.scala-lang.org"),
-    GROOVY("http://www.groovy-lang.org"),
+    GROOVY("http://www.groovy-lang.org", "Supported by the Apache Software Foundation"),
     KOTLIN("https://kotlinlang.org", "Sponsored and developed by JetBrains"),
     CEYLON("http://www.ceylon-lang.org", "Sponsored by Red Hat");
     private final String[] notes;
@@ -33,9 +33,9 @@ public enum SourceCodeLanguage {
     /**
      * Gets the source code language of the provided BytecodeClass.
      * This is only accurate when the sourceFile attribute has not been spoofed in any way.
-     * If the sourceFile attribute has been completely removed, then the source code language is identified via markers that the source code language's compilers leave behind in the bytecode.
+     * If the sourceFile attribute has been completely removed, then the source code language is identified via markers that the source code language's compilers leave behind.
      * Unfortunately, not all compilers leave behind markers that can be used to identify the bytecode's source code language.
-     * For example, if the sourceFile attribute has been removed from a Groovy annotation then we are unable to detect that it was originally s Groovy annotation and will instead report back that it's source code language was Java.
+     * For example, if the sourceFile attribute has been removed from a Groovy annotation then we are unable to detect that it was originally a Groovy annotation and will instead return that it's source code language was Java.
      * Without the sourceFile attribute, Groovy interfaces can also not be distinguished from Java interfaces.
      *
      * @param bc An instance of a BytecodeClass
@@ -134,7 +134,7 @@ public enum SourceCodeLanguage {
         }
         /*
         Let's assume that the source code language was Java if we don't identify a marker that would lead us to believe
-        that it's bytecode was built from another source code language.
+        that the bytecode was built from another source code language.
         */
         return SourceCodeLanguage.JAVA;
     }
