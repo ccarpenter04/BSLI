@@ -115,8 +115,13 @@ public class BytecodeClass {
         return (asm.access & Opcodes.ACC_SUPER) == Opcodes.ACC_SUPER;
     }
 
-
-    public SourceCodeLanguage getSourceLanguage() {
+    /**
+     * Gets a cached version of a value from the SourceCodeLanguage enum if available.
+     * Otherwise the calling instance is analyzed and the results are cached.
+     *
+     * @return a non-null value from the SourceCodeLanguage enum.
+     */
+    public SourceCodeLanguage getSourceCodeLanguage() {
         if (language == null) {
             language = SourceCodeLanguage.identify(this);
         }
