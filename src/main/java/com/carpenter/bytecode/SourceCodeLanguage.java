@@ -5,6 +5,7 @@ import org.objectweb.asm.Attribute;
 import org.objectweb.asm.tree.AnnotationNode;
 import org.objectweb.asm.tree.ClassNode;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -22,6 +23,11 @@ public enum SourceCodeLanguage {
 
     SourceCodeLanguage(String... notes) {
         this.notes = notes;
+    }
+
+    @Override
+    public String toString() {
+        return name() + " " + Arrays.asList(notes);
     }
 
     /**
