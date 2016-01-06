@@ -1,6 +1,6 @@
 package com.carpenter.bytecode.hierachy;
 
-import com.carpenter.bytecode.SourceLanguage;
+import com.carpenter.bytecode.SourceCodeLanguage;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.ClassNode;
 
@@ -11,7 +11,7 @@ import org.objectweb.asm.tree.ClassNode;
  */
 public class BytecodeClass {
     private final ClassNode asm;
-    private SourceLanguage language;
+    private SourceCodeLanguage language;
 
     public BytecodeClass(ClassNode asm) {
         this.asm = asm;
@@ -116,9 +116,9 @@ public class BytecodeClass {
     }
 
 
-    public SourceLanguage getSourceLanguage() {
+    public SourceCodeLanguage getSourceLanguage() {
         if (language == null) {
-            language = SourceLanguage.identify(this);
+            language = SourceCodeLanguage.identify(this);
         }
         return language;
     }

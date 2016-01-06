@@ -1,9 +1,8 @@
 ## BSLI
-A library that attempts to identify the language that a given class file was compiled from. This is useful for determining which standard runtimes are required ahead of time to do complete static analysis.
+A library that attempts to identify the source code language that class files were compiled from.
+This is useful for determining which standard runtimes are required ahead of time to do more thorough static analysis.
 
-Pull requests are welcome along with suggested language additions and any hints as to how to better detect any of the supported source languages.
-
-Unit tests also need to be written to verify correct functionality. Anyone is welcome to write them.
+Pull requests that add support for detecting new source code languages, fix detection methods, and improve detection methods are welcome.
 
 ### Supported languages
 * Java
@@ -11,11 +10,3 @@ Unit tests also need to be written to verify correct functionality. Anyone is we
 * Groovy
 * Kotlin
 * Ceylon
-
-### Coming soon?
-* Frege
-* Clojure
-* JRuby
-* Jython
-
-
