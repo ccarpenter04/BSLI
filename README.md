@@ -1,7 +1,7 @@
 ## BSLI - Bytecode Source Language Identifier
 A library that attempts to identify the source code languages that bytecode classes were compiled from.
 
-Pull requests that add support for detecting new source code languages, fix detection methods, and improve detection methods are welcome.
+Pull requests that add support for detecting new source code languages, fix detection methods, and/or improve detection methods are welcome.
 
 ### Supported languages
 * Java
