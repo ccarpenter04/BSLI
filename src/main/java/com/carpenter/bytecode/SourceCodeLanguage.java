@@ -2,11 +2,10 @@ package com.carpenter.bytecode;
 
 import com.carpenter.bytecode.hierachy.BytecodeClass;
 import org.objectweb.asm.Attribute;
-import org.objectweb.asm.tree.AnnotationNode;
-import org.objectweb.asm.tree.ClassNode;
+import org.objectweb.asm.tree.*;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.ListIterator;
 
 /**
  * An enum containing the languages that we try to detect as the source language of bytecode classes.
@@ -23,11 +22,6 @@ public enum SourceCodeLanguage {
 
     SourceCodeLanguage(String... notes) {
         this.notes = notes;
-    }
-
-    @Override
-    public String toString() {
-        return name() + " " + Arrays.asList(notes);
     }
 
     /**
@@ -81,14 +75,14 @@ public enum SourceCodeLanguage {
             //Top level Groovy classes extend groovy/lang/Script.
             return SourceCodeLanguage.GROOVY;
         }
-        for (String iface : (List<String>) asm.interfaces) {
+        for (String iface : asm.interfaces) {
             if (iface.equals("groovy/lang/GroovyObject")) {
-                //Groovy enums and inner classes implement groovy/lang/GroovyObjet.
+                //Groovy enums and inner classes implement groovy/lang/GroovyObject.
                 return SourceCodeLanguage.GROOVY;
             }
         }
         if (asm.visibleAnnotations != null) {
-            for (AnnotationNode annotation : (List<AnnotationNode>) asm.visibleAnnotations) {
+            for (AnnotationNode annotation : asm.visibleAnnotations) {
                 switch (annotation.desc) {
                     case "Lkotlin/jvm/internal/KotlinClass;":
                         //Kotlin classes, enums, objects, and interfaces have this annotation.
@@ -109,7 +103,7 @@ public enum SourceCodeLanguage {
             }
         }
         if (asm.attrs != null) {
-            for (Attribute attribute : (List<Attribute>) asm.attrs) {
+            for (Attribute attribute : asm.attrs) {
                 switch (attribute.type) {
                     case "Scala":
                         //Scala "inner" objects and traits contain this non-standard bytecode attribute.
@@ -131,10 +125,25 @@ public enum SourceCodeLanguage {
                 }
             }
         }
+        for (MethodNode mn : asm.methods) {
+            ListIterator<AbstractInsnNode> itr = mn.instructions.iterator();
+            while (itr.hasNext()) {
+                AbstractInsnNode insn = itr.next();
+                //Look for kotlin standard library calls.
+                if (insn instanceof MethodInsnNode && ((MethodInsnNode) insn).owner.startsWith("kotlin/")) {
+                    return SourceCodeLanguage.KOTLIN;
+                }
+            }
+        }
         /*
         Let's assume that the source code language was Java if we don't identify a marker that would lead us to believe
         that the bytecode was built from another source code language.
         */
         return SourceCodeLanguage.JAVA;
+    }
+
+    @Override
+    public String toString() {
+        return name() + ' ' + Arrays.asList(notes);
     }
 }
